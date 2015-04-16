@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+@import UIKit;
 
-@interface CollectionViewDataSource : NSObject
+@interface HomeCollectionViewDataSource : NSObject <UICollectionViewDataSource>
 
 @end
