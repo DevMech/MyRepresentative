@@ -32,14 +32,10 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - CollectionView Delegate 
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
 }
-*/
 
 @end
