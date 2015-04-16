@@ -7,21 +7,23 @@
 //
 
 #import "SearchTableViewDataSource.h"
+#import "Representative.h"
+#import "RepresentativesController.h"
 
 @implementation SearchTableViewDataSource
 
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.reps.count;
+    if ([RepresentativesController sharedInstance].repsArray.count == 0) {
+        return 0;
+    } else {
+    return [RepresentativesController sharedInstance].repsArray.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *repsArray = [RepresentativesController sharedInstance].repsArray;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    Representative *rep = self.reps[indexPath.row];
+    Representative *rep = repsArray[indexPath.row];
     cell.textLabel.text = rep.name;
     cell.detailTextLabel.text = [rep.state stringByAppendingString:[NSString stringWithFormat:@" - %@",rep.party]];
     return cell;
