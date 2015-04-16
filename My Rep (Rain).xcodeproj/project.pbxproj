@@ -19,7 +19,9 @@
 		6A3F1D401AE0190600B1B7DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A3F1D3B1AE0190600B1B7DE /* Main.storyboard */; };
 		6A3F1D461AE01A1F00B1B7DE /* SearchTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D451AE01A1F00B1B7DE /* SearchTableViewDataSource.m */; };
 		6A3F1D4B1AE0252300B1B7DE /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D4A1AE0252300B1B7DE /* HomeViewController.m */; };
-		6A3F1D4F1AE0257300B1B7DE /* CollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D4E1AE0257300B1B7DE /* CollectionViewDataSource.m */; };
+		6A3F1D4F1AE0257300B1B7DE /* HomeCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D4E1AE0257300B1B7DE /* HomeCollectionViewDataSource.m */; };
+		6A3F1D521AE042DB00B1B7DE /* HomeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D511AE042DB00B1B7DE /* HomeCollectionViewCell.m */; };
+		6A3F1D591AE069A100B1B7DE /* AppearanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D581AE069A100B1B7DE /* AppearanceController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,8 +58,12 @@
 		6A3F1D451AE01A1F00B1B7DE /* SearchTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewDataSource.m; sourceTree = "<group>"; };
 		6A3F1D491AE0252300B1B7DE /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		6A3F1D4A1AE0252300B1B7DE /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		6A3F1D4D1AE0257300B1B7DE /* CollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewDataSource.h; sourceTree = "<group>"; };
-		6A3F1D4E1AE0257300B1B7DE /* CollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewDataSource.m; sourceTree = "<group>"; };
+		6A3F1D4D1AE0257300B1B7DE /* HomeCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCollectionViewDataSource.h; sourceTree = "<group>"; };
+		6A3F1D4E1AE0257300B1B7DE /* HomeCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionViewDataSource.m; sourceTree = "<group>"; };
+		6A3F1D501AE042DB00B1B7DE /* HomeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCollectionViewCell.h; sourceTree = "<group>"; };
+		6A3F1D511AE042DB00B1B7DE /* HomeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionViewCell.m; sourceTree = "<group>"; };
+		6A3F1D571AE069A100B1B7DE /* AppearanceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceController.h; sourceTree = "<group>"; };
+		6A3F1D581AE069A100B1B7DE /* AppearanceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +107,12 @@
 			children = (
 				6A3F1D111AE018CD00B1B7DE /* AppDelegate.h */,
 				6A3F1D121AE018CD00B1B7DE /* AppDelegate.m */,
+				6A3F1D571AE069A100B1B7DE /* AppearanceController.h */,
+				6A3F1D581AE069A100B1B7DE /* AppearanceController.m */,
 				6A3F1D3B1AE0190600B1B7DE /* Main.storyboard */,
 				6A3F1D431AE019E400B1B7DE /* Model */,
-				6A3F1D411AE019B900B1B7DE /* Views */,
 				6A3F1D421AE019DD00B1B7DE /* Controller */,
+				6A3F1D411AE019B900B1B7DE /* Views */,
 				6A3F1D1A1AE018CD00B1B7DE /* Images.xcassets */,
 				6A3F1D1C1AE018CD00B1B7DE /* LaunchScreen.xib */,
 				6A3F1D0D1AE018CD00B1B7DE /* Supporting Files */,
@@ -191,8 +199,10 @@
 			children = (
 				6A3F1D491AE0252300B1B7DE /* HomeViewController.h */,
 				6A3F1D4A1AE0252300B1B7DE /* HomeViewController.m */,
-				6A3F1D4D1AE0257300B1B7DE /* CollectionViewDataSource.h */,
-				6A3F1D4E1AE0257300B1B7DE /* CollectionViewDataSource.m */,
+				6A3F1D4D1AE0257300B1B7DE /* HomeCollectionViewDataSource.h */,
+				6A3F1D4E1AE0257300B1B7DE /* HomeCollectionViewDataSource.m */,
+				6A3F1D501AE042DB00B1B7DE /* HomeCollectionViewCell.h */,
+				6A3F1D511AE042DB00B1B7DE /* HomeCollectionViewCell.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -301,11 +311,13 @@
 				6A3F1D3E1AE0190600B1B7DE /* RepresentativesController.m in Sources */,
 				6A3F1D461AE01A1F00B1B7DE /* SearchTableViewDataSource.m in Sources */,
 				6A3F1D3C1AE0190600B1B7DE /* SearchViewController.m in Sources */,
-				6A3F1D4F1AE0257300B1B7DE /* CollectionViewDataSource.m in Sources */,
+				6A3F1D591AE069A100B1B7DE /* AppearanceController.m in Sources */,
+				6A3F1D4F1AE0257300B1B7DE /* HomeCollectionViewDataSource.m in Sources */,
 				6A3F1D101AE018CD00B1B7DE /* main.m in Sources */,
 				6A3F1D3F1AE0190600B1B7DE /* Representative.m in Sources */,
 				6A3F1D3D1AE0190600B1B7DE /* DetailViewController.m in Sources */,
 				6A3F1D4B1AE0252300B1B7DE /* HomeViewController.m in Sources */,
+				6A3F1D521AE042DB00B1B7DE /* HomeCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
