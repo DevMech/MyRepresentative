@@ -23,6 +23,20 @@
 
 @implementation SearchViewController
 
+-(void)updateWithSearchType:(Type)searchType {
+    self.type = searchType;
+    switch (searchType) {
+        case TypeZip:
+            [self.searchButton setTitle: @"Search Zip" forState:UIControlStateNormal];
+            break;
+        case TypeState:
+            [self.searchButton setTitle: @"Search State" forState:UIControlStateNormal];
+            break;
+        case TypeName:
+            [self.searchButton setTitle: @"Search Name" forState:UIControlStateNormal];
+            break;
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
