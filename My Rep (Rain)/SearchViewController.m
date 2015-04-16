@@ -7,18 +7,17 @@
 //
 
 #import "SearchViewController.h"
+#import "HomeViewController.h"
 #import "DetailViewController.h"
 #import "Representative.h"
 #import "RepresentativesController.h"
 
-@interface SearchViewController () <UITableViewDelegate>
+@interface SearchViewController () <UITableViewDelegate, UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
-@property (weak, nonatomic) IBOutlet UIButton *searchButton;
-@property (strong, nonatomic) NSString *searchString;
 @property (strong, nonatomic) NSArray *reps;
-
 @end
 
 @implementation SearchViewController
@@ -42,19 +41,36 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-- (IBAction)searchButtonPressed:(id)sender {
-    [[RepresentativesController sharedInstance] searchRepWithZip:self.searchTextField.text completion:^(BOOL success) {
-        if (success) {
-            self.reps = [RepresentativesController sharedInstance].repsArray;
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"error");
-        }
-    }];
+#pragma mark - TextField Delegate 
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if ([textField.text isEqualToString:@""]) {
+        [textField resignFirstResponder];
+        return YES;
+    } else {
+        [[RepresentativesController sharedInstance] searchRepWithInfo:self.searchTextField.text searchType:self.type completion:^(BOOL success) {
+            if (success) {
+                self.reps = [RepresentativesController sharedInstance].repsArray;
+                [self.tableView reloadData];
+            } else {
+                NSLog(@"error");
+            }
+        }];
+        [textField resignFirstResponder];
+        return YES;
+    }
+    return NO;
 }
 
-
-
+-(void)presentFailureAlert {
+    UIAlertController *failAlert = [UIAlertController alertControllerWithTitle:@"Search Unsuccessful" message:@"Check your search and try again" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [failAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [self presentViewController:failAlert animated:YES completion:nil];
+}
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
