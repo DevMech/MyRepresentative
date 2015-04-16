@@ -7,6 +7,7 @@
 //
 
 #import "HomeCollectionViewDataSource.h"
+#import "HomeCollectionViewCell.h"
 
 
 static NSString *cellID = @"cellID";
@@ -14,11 +15,12 @@ static NSString *cellID = @"cellID";
 @implementation HomeCollectionViewDataSource
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    Home *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    UIImage *itemImage = [self icons][indexPath.row];
-    UIImageView *itemImageView = [[UIImageView alloc] initWithImage:itemImage];
-    cell
-    [cell.contentView addSubview:itemImageView];
+    HomeCollectionViewCell *cell = (HomeCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
+    UIImage *iconImage = [self icons][indexPath.item];
+    UIImageView *iconImageView = [[UIImageView alloc] initWithImage:iconImage];
+    cell.icon = iconImageView;
+    cell.searchTypeLabel.text = [self footerLabels][indexPath.row];
+
     return cell; 
 }
 
