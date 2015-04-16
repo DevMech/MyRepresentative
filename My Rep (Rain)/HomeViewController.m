@@ -7,8 +7,12 @@
 //
 
 #import "HomeViewController.h"
+#import "HomeCollectionViewCell.h"
+#import "SearchViewController.h"
 
-@interface HomeViewController ()
+@interface HomeViewController () <UICollectionViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -22,12 +26,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    HomeCollectionViewCell *cell = sender;
+    SearchViewController *searchViewController = [segue destinationViewController];
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    [searchViewController updateWithSearchType:indexPath.item];
+}
+
 -(void)viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
