@@ -7,6 +7,8 @@
 //
 
 #import "DetailViewController.h"
+#import "WebSiteViewController.h"
+#import "MapViewViewController.h"
 
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -26,16 +28,23 @@
     [self configureView];
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib.
+    [self configureView];
+}
+
 - (void)configureView {
+    self.title = self.rep.name;
     self.nameLabel.text = self.rep.name;
     self.stateLabel.text = self.rep.state;
     self.partylabel.text = self.rep.party;
     if ([self.rep.party isEqualToString:@"R"]) {
-        self.view.backgroundColor = [UIColor redColor];
+
     } else if ([self.rep.party isEqualToString:@"I"]){
-        self.view.backgroundColor = [UIColor yellowColor];
+        
     } else {
-        self.view.backgroundColor = [UIColor blueColor];
+        
     }
     self.districtLabel.text = self.rep.district;
     self.addressLabel.text = self.rep.office;
@@ -46,15 +55,17 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    [self configureView];
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"site"]) {
+        WebSiteViewController *webSiteViewController = [segue destinationViewController];
+        [webSiteViewController updateWithRep:self.rep];
+    }
+    else if ([segue.identifier isEqualToString:@"map"]) {
+        MapViewViewController *mapViewController = [segue destinationViewController];
+        [mapViewController updateWithRep:self.rep];
+    }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end
