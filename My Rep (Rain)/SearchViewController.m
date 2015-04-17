@@ -12,38 +12,42 @@
 #import "Representative.h"
 #import "RepresentativesController.h"
 
-@interface SearchViewController () <UITableViewDelegate, UITextFieldDelegate>
 @interface SearchViewController () <UITableViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) CLLocation *userCurrentLocation;
+
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
-@property (strong, nonatomic) NSArray *reps;
+@property (nonatomic) NSArray *reps;
 @end
 
 @implementation SearchViewController
 
 -(void)updateWithSearchType:(Type)searchType {
     self.type = searchType;
-    switch (searchType) {
-        case TypeZip:
-            [self.searchButton setTitle: @"Search Zip" forState:UIControlStateNormal];
-            break;
-        case TypeState:
-            [self.searchButton setTitle: @"Search State" forState:UIControlStateNormal];
-            break;
-        case TypeName:
-            [self.searchButton setTitle: @"Search Name" forState:UIControlStateNormal];
-            break;
+    self.reps = nil;
+    [self.tableView reloadData];
     if (self.type == TypeCurrentLocation) {
         [self determineUsersCurrentLocation];
     }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    NSArray *typesArray = @[@"Search By Zip", @"Search By State", @"Search By Name", @"Current Location"];
+    self.title = typesArray[self.type];
+    self.searchTextField.placeholder = [NSString stringWithFormat:@"Enter %@", typesArray[self.type]];
+    [self.cancelButton setHidden:YES];
+    [self.tableView reloadData];
+}
+
+- (IBAction)cancelButtonPressed:(id)sender {
+    self.searchTextField.text = @"";
+    [self.searchTextField resignFirstResponder];
+    [self.cancelButton setHidden:YES];
+}
+
 #pragma mark - CLLocation
 
 -(void)determineUsersCurrentLocation {
@@ -131,6 +135,7 @@
     
     [self presentViewController:failAlert animated:YES completion:nil];
 }
+
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
