@@ -9,6 +9,7 @@
 #import "SearchTableViewDataSource.h"
 #import "Representative.h"
 #import "RepresentativesController.h"
+#import "Colors.h"
 
 @implementation SearchTableViewDataSource
 
@@ -24,6 +25,15 @@
     NSArray *repsArray = [RepresentativesController sharedInstance].repsArray;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     Representative *rep = repsArray[indexPath.row];
+    
+    //Set Cell Background color according to party
+    if ([rep.party isEqualToString:@"R"]) {
+        cell.backgroundColor = RepublicanRed;
+    } else if ([rep.party isEqualToString:@"D"]) {
+        cell.backgroundColor = DemocratBlue;
+    } else if ([rep.party isEqualToString:@"L"]) {
+        cell.backgroundColor = LibYellow;
+    }
     cell.textLabel.text = rep.name;
     cell.detailTextLabel.text = [rep.state stringByAppendingString:[NSString stringWithFormat:@" - %@",rep.party]];
     return cell;
