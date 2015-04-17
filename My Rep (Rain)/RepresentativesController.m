@@ -21,8 +21,19 @@
     return sharedInstance;
 }
 
-- (void)searchRepWithZip:(NSString *)zip completion:(void (^)(BOOL))completion {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http:whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", zip]];
+- (void)searchRepWithInfo:(NSString *)info searchType:(NSInteger)searchType completion:(void (^)(BOOL success))completion {
+    NSURL *url;
+    switch (searchType) {
+        case 0:
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"http:whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", info]];
+            break;
+        case 1:
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"http://whoismyrepresentative.com/getall_reps_bystate.php?state=%@&output=json", info]];
+            break;
+        case 2:
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"http://whoismyrepresentative.com/getall_reps_byname.php?name=%@&output=json", info]];
+            break;
+    }
     NSError *error;
     NSArray *array = [[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:url] options:NSJSONReadingAllowFragments error:&error] objectForKey:@"results"];
     
@@ -32,11 +43,10 @@
         Representative *rep = [[Representative alloc] initWithDictionary:dictionary];
         [tempRepsList addObject:rep];
     }
-    
     if (array) {
         self.repsArray = tempRepsList;
         completion(YES);
-        NSLog(@"%@", self.repsArray);
     }
 }
+
 @end

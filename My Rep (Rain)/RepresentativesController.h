@@ -13,6 +13,7 @@
 @property (strong, nonatomic) NSArray *repsArray;
 
 + (RepresentativesController *)sharedInstance;
-- (void)searchRepWithZip:(NSString *)zip completion:(void (^)(BOOL success))completion;
+
+- (void)searchRepWithInfo:(NSString *)info searchType:(NSInteger)searchType completion:(void (^)(BOOL success))completion;
 
 @end
