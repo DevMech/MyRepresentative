@@ -85,15 +85,29 @@
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     NSLog(@"%@", &error);
 }
+
+#pragma mark TableView Delegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - TextField Delegate 
 
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self.cancelButton setHidden:NO];
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    //Return if no text
     if ([textField.text isEqualToString:@""]) {
         [textField resignFirstResponder];
+        [self.cancelButton setHidden:YES];
         return YES;
     } else {
+        [self.cancelButton setHidden:YES];
+        
+        //Hit API With TextField Text
         [[RepresentativesController sharedInstance] searchRepWithInfo:self.searchTextField.text searchType:self.type completion:^(BOOL success) {
             if (success) {
                 self.reps = [RepresentativesController sharedInstance].repsArray;
