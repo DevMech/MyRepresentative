@@ -13,8 +13,11 @@
 #import "RepresentativesController.h"
 
 @interface SearchViewController () <UITableViewDelegate, UITextFieldDelegate>
+@interface SearchViewController () <UITableViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (nonatomic) CLLocation *userCurrentLocation;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (strong, nonatomic) NSArray *reps;
@@ -34,11 +37,54 @@
         case TypeName:
             [self.searchButton setTitle: @"Search Name" forState:UIControlStateNormal];
             break;
+    if (self.type == TypeCurrentLocation) {
+        [self determineUsersCurrentLocation];
     }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+#pragma mark - CLLocation
+
+-(void)determineUsersCurrentLocation {
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = 200;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.locationManager requestAlwaysAuthorization];
+    
+    [self.locationManager startUpdatingLocation];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations  {
+    self.userCurrentLocation = [locations firstObject];
+    [self.locationManager stopUpdatingLocation];
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:self.userCurrentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (!error) {
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+//          NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+            NSString *zipcode = [[NSString alloc]initWithString:placemark.postalCode];
+            
+//          Hit API with zip from current location
+            [[RepresentativesController sharedInstance] searchRepWithInfo:zipcode searchType:TypeZip completion:^(BOOL success) {
+                if (success) {
+                    self.reps = [RepresentativesController sharedInstance].repsArray;
+                    [self.tableView reloadData];
+                } else {
+                    NSLog(@"error");
+                }
+            }];
+        } else {
+            NSLog(@"Geocode failed with error %@", error); // Error handling must required
+        }
+    }];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"%@", &error);
+}
 }
 
 #pragma mark - TextField Delegate 

@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 typedef NS_ENUM (NSInteger, Type) {
     TypeZip,
     TypeState,
-    TypeName
+    TypeName,
+    TypeCurrentLocation
 };
+
 @interface SearchViewController : UIViewController
+
 @property (assign, nonatomic) Type type;
 
 -(void)updateWithSearchType:(Type)searchType;
