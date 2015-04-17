@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "zipCode.png"
+      "filename" : "siteBlue.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "zipCode@2x.png"
+      "filename" : "siteBlue@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "zipCode@3x.png"
+      "filename" : "siteBlue@3x.png"
     }
   ],
   "info" : {
