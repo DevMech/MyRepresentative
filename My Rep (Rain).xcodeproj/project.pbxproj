@@ -22,6 +22,11 @@
 		6A3F1D4F1AE0257300B1B7DE /* HomeCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D4E1AE0257300B1B7DE /* HomeCollectionViewDataSource.m */; };
 		6A3F1D521AE042DB00B1B7DE /* HomeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D511AE042DB00B1B7DE /* HomeCollectionViewCell.m */; };
 		6A3F1D591AE069A100B1B7DE /* AppearanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D581AE069A100B1B7DE /* AppearanceController.m */; };
+		6A3F1D5C1AE06E5200B1B7DE /* MapViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D5B1AE06E5200B1B7DE /* MapViewViewController.m */; };
+		6A3F1D601AE06E6B00B1B7DE /* WebSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D5F1AE06E6B00B1B7DE /* WebSiteViewController.m */; };
+		6A3F1D631AE087BD00B1B7DE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F1D621AE087BD00B1B7DE /* MapKit.framework */; };
+		6A3F1D661AE14D0300B1B7DE /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D651AE14D0300B1B7DE /* MyAnnotation.m */; };
+		6ABB62E51AE1743100448ACA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABB62E31AE173ED00448ACA /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +69,15 @@
 		6A3F1D511AE042DB00B1B7DE /* HomeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionViewCell.m; sourceTree = "<group>"; };
 		6A3F1D571AE069A100B1B7DE /* AppearanceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceController.h; sourceTree = "<group>"; };
 		6A3F1D581AE069A100B1B7DE /* AppearanceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceController.m; sourceTree = "<group>"; };
+		6A3F1D5A1AE06E5200B1B7DE /* MapViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewViewController.h; sourceTree = "<group>"; };
+		6A3F1D5B1AE06E5200B1B7DE /* MapViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewViewController.m; sourceTree = "<group>"; };
+		6A3F1D5E1AE06E6B00B1B7DE /* WebSiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSiteViewController.h; sourceTree = "<group>"; };
+		6A3F1D5F1AE06E6B00B1B7DE /* WebSiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSiteViewController.m; sourceTree = "<group>"; };
+		6A3F1D621AE087BD00B1B7DE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6A3F1D641AE14D0300B1B7DE /* MyAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotation.h; sourceTree = "<group>"; };
+		6A3F1D651AE14D0300B1B7DE /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
+		6ABB62E31AE173ED00448ACA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6ABB62E91AE1942100448ACA /* Colors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +85,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ABB62E51AE1743100448ACA /* CoreLocation.framework in Frameworks */,
+				6A3F1D631AE087BD00B1B7DE /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +123,7 @@
 			children = (
 				6A3F1D111AE018CD00B1B7DE /* AppDelegate.h */,
 				6A3F1D121AE018CD00B1B7DE /* AppDelegate.m */,
+				6ABB62E91AE1942100448ACA /* Colors.h */,
 				6A3F1D571AE069A100B1B7DE /* AppearanceController.h */,
 				6A3F1D581AE069A100B1B7DE /* AppearanceController.m */,
 				6A3F1D3B1AE0190600B1B7DE /* Main.storyboard */,
@@ -123,6 +140,8 @@
 		6A3F1D0D1AE018CD00B1B7DE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6ABB62E31AE173ED00448ACA /* CoreLocation.framework */,
+				6A3F1D621AE087BD00B1B7DE /* MapKit.framework */,
 				6A3F1D0E1AE018CD00B1B7DE /* Info.plist */,
 				6A3F1D0F1AE018CD00B1B7DE /* main.m */,
 			);
@@ -152,6 +171,8 @@
 				6A3F1D4C1AE0255400B1B7DE /* Home */,
 				6A3F1D471AE01A2400B1B7DE /* Search View */,
 				6A3F1D481AE01A3F00B1B7DE /* Detail View */,
+				6A3F1D611AE06E6E00B1B7DE /* Web Site View */,
+				6A3F1D5D1AE06E5700B1B7DE /* MapView */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -205,6 +226,26 @@
 				6A3F1D511AE042DB00B1B7DE /* HomeCollectionViewCell.m */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		6A3F1D5D1AE06E5700B1B7DE /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				6A3F1D5A1AE06E5200B1B7DE /* MapViewViewController.h */,
+				6A3F1D5B1AE06E5200B1B7DE /* MapViewViewController.m */,
+				6A3F1D641AE14D0300B1B7DE /* MyAnnotation.h */,
+				6A3F1D651AE14D0300B1B7DE /* MyAnnotation.m */,
+			);
+			name = MapView;
+			sourceTree = "<group>";
+		};
+		6A3F1D611AE06E6E00B1B7DE /* Web Site View */ = {
+			isa = PBXGroup;
+			children = (
+				6A3F1D5E1AE06E6B00B1B7DE /* WebSiteViewController.h */,
+				6A3F1D5F1AE06E6B00B1B7DE /* WebSiteViewController.m */,
+			);
+			name = "Web Site View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,11 +349,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A3F1D131AE018CD00B1B7DE /* AppDelegate.m in Sources */,
+				6A3F1D601AE06E6B00B1B7DE /* WebSiteViewController.m in Sources */,
 				6A3F1D3E1AE0190600B1B7DE /* RepresentativesController.m in Sources */,
 				6A3F1D461AE01A1F00B1B7DE /* SearchTableViewDataSource.m in Sources */,
+				6A3F1D661AE14D0300B1B7DE /* MyAnnotation.m in Sources */,
 				6A3F1D3C1AE0190600B1B7DE /* SearchViewController.m in Sources */,
 				6A3F1D591AE069A100B1B7DE /* AppearanceController.m in Sources */,
 				6A3F1D4F1AE0257300B1B7DE /* HomeCollectionViewDataSource.m in Sources */,
+				6A3F1D5C1AE06E5200B1B7DE /* MapViewViewController.m in Sources */,
 				6A3F1D101AE018CD00B1B7DE /* main.m in Sources */,
 				6A3F1D3F1AE0190600B1B7DE /* Representative.m in Sources */,
 				6A3F1D3D1AE0190600B1B7DE /* DetailViewController.m in Sources */,
@@ -504,6 +548,7 @@
 				6A3F1D2F1AE018CE00B1B7DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6A3F1D301AE018CE00B1B7DE /* Build configuration list for PBXNativeTarget "My Rep (Rain)Tests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +557,7 @@
 				6A3F1D321AE018CE00B1B7DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
