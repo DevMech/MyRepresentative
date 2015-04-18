@@ -113,17 +113,59 @@
         
         //Hit API With TextField Text
         [[RepresentativesController sharedInstance] searchRepWithInfo:self.searchTextField.text searchType:self.type completion:^(BOOL success) {
+        NSString *searchString = textField.text;
+        
+        //Account for full state name searches
+        if (searchString.length > 2 && self.type == TypeState) {
+            searchString = [textField.text stateAbbreviationFromFullName];
+        }
+        [[RepresentativesController sharedInstance] searchRepWithInfo:searchString searchType:self.type completion:^(BOOL success) {
             if (success) {
                 self.reps = [RepresentativesController sharedInstance].repsArray;
                 [self.tableView reloadData];
             } else {
-                NSLog(@"error");
+                [self presentFailureAlert];
             }
         }];
         [textField resignFirstResponder];
         return YES;
     }
     return NO;
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSCharacterSet *nonNumberSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    NSCharacterSet *nonLetterSet = [[NSCharacterSet letterCharacterSet] invertedSet];
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+
+    switch (self.type) {
+        //Limit to valid Zip code
+        case TypeZip: {
+            if(newLength > 5 || [string rangeOfCharacterFromSet:nonNumberSet].location != NSNotFound){
+                return NO;
+            } else {
+                return YES;
+            }
+            break; }
+        //Limit to Letters only
+        case TypeState:{
+            if([string rangeOfCharacterFromSet:nonLetterSet].location != NSNotFound){
+                return NO;
+            } else {
+                return YES;
+            }
+            break; }
+        //Limit to Letters only
+        case TypeName:{
+            if([string rangeOfCharacterFromSet:nonLetterSet].location != NSNotFound){
+                return NO;
+            } else {
+                return YES;
+            }
+            break; }
+        default:
+            return YES;
+    }
 }
 
 -(void)presentFailureAlert {
