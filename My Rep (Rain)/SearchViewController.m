@@ -28,10 +28,12 @@
 
 -(void)updateWithSearchType:(Type)searchType {
     self.type = searchType;
+    [RepresentativesController sharedInstance].repsArray = nil;
     if (self.type == TypeCurrentLocation) {
         [self determineUsersCurrentLocation];
     }
 }
+
 -(void)viewDidLoad {
     [super viewDidLoad];
     //Reset Tableview
@@ -122,6 +124,8 @@
         [self.cancelButton setHidden:YES];
         return YES;
     } else {
+        //Fixes lingering cells bug
+        [RepresentativesController sharedInstance].repsArray = nil;
         [self.cancelButton setHidden:YES];
         
         //Hit API With TextField Text

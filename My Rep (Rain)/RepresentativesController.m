@@ -27,6 +27,8 @@
 }
 
 -(void)searchRepWithInfo:(NSString *)info searchType:(NSInteger)searchType completion:(void (^)(BOOL success))completion {
+    self.repsArray = [NSMutableArray new];
+    self.senatorsArray = [NSMutableArray new];
     NSURL *url;
     switch (searchType) {
         case 0:
