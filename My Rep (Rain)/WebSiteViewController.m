@@ -7,6 +7,7 @@
 //
 
 #import "WebSiteViewController.h"
+#import "Colors.h"
 @import WebKit;
 
 @interface WebSiteViewController () <WKNavigationDelegate>
@@ -22,7 +23,7 @@
     self.rep = rep;
 }
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
     
     //WKWebView
@@ -33,6 +34,12 @@
     
     //ActivityIndicator
     [self.activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+    
+    if ([self.rep.party isEqualToString:@"R"]) {
+        self.activityIndicator.color = RepublicanRed;
+    } else if ([self.rep.party isEqualToString:@"D"]) {
+        self.activityIndicator.color = DemocratBlue;
+    }
     [self.activityIndicator startAnimating];
     [self.activityIndicator setHidesWhenStopped:YES];
     [self.webView addSubview:self.activityIndicator];
@@ -43,7 +50,7 @@
     [self configureView];
 }
 
-- (void)configureView {
+-(void)configureView {
     
     NSURL *url = [NSURL URLWithString:self.rep.website];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
