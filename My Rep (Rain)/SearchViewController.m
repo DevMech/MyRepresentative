@@ -11,6 +11,7 @@
 #import "DetailViewController.h"
 #import "Representative.h"
 #import "RepresentativesController.h"
+#import "NSString+USStateMap.h"
 
 @interface SearchViewController () <UITableViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate>
 
@@ -20,29 +21,42 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
-@property (nonatomic) NSArray *reps;
+@property (strong, nonatomic) NSArray *reps;
 @end
 
 @implementation SearchViewController
 
 -(void)updateWithSearchType:(Type)searchType {
     self.type = searchType;
-    self.reps = nil;
-    [self.tableView reloadData];
     if (self.type == TypeCurrentLocation) {
         [self determineUsersCurrentLocation];
     }
 }
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
+    //Reset Tableview
+    [RepresentativesController sharedInstance].repsArray = nil;
+    [self.tableView reloadData];
+    
+    switch (self.type) {
+        case TypeZip:
+            self.searchTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            break;
+        case TypeCurrentLocation:
+            [self.searchTextField removeFromSuperview];
+            break;
+        default:
+            break;
+    }
     NSArray *typesArray = @[@"Search By Zip", @"Search By State", @"Search By Name", @"Current Location"];
     self.title = typesArray[self.type];
-    self.searchTextField.placeholder = [NSString stringWithFormat:@"Enter %@", typesArray[self.type]];
+
+    NSArray *placeHolders = @[@"Zip", @"State", @"Name", @"Current Location"];
+    self.searchTextField.placeholder = [NSString stringWithFormat:@"Enter %@", placeHolders[self.type]];
     [self.cancelButton setHidden:YES];
-    [self.tableView reloadData];
 }
 
-- (IBAction)cancelButtonPressed:(id)sender {
+-(IBAction)cancelButtonPressed:(id)sender {
     self.searchTextField.text = @"";
     [self.searchTextField resignFirstResponder];
     [self.cancelButton setHidden:YES];
@@ -55,7 +69,7 @@
     self.locationManager.delegate = self;
     self.locationManager.distanceFilter = 200;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [self.locationManager requestAlwaysAuthorization];
+    [self.locationManager requestWhenInUseAuthorization];
     
     [self.locationManager startUpdatingLocation];
 }
@@ -68,10 +82,9 @@
     [geocoder reverseGeocodeLocation:self.userCurrentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         if (!error) {
             CLPlacemark *placemark = [placemarks objectAtIndex:0];
-//          NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
             NSString *zipcode = [[NSString alloc]initWithString:placemark.postalCode];
             
-//          Hit API with zip from current location
+            //Hit API with zip from current location
             [[RepresentativesController sharedInstance] searchRepWithInfo:zipcode searchType:TypeZip completion:^(BOOL success) {
                 if (success) {
                     self.reps = [RepresentativesController sharedInstance].repsArray;
@@ -81,13 +94,13 @@
                 }
             }];
         } else {
-            NSLog(@"Geocode failed with error %@", error); // Error handling must required
+            [self presentFailureAlert];
         }
     }];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    NSLog(@"%@", &error);
+    NSLog(@"%@", error);
 }
 
 #pragma mark TableView Delegate
@@ -112,7 +125,6 @@
         [self.cancelButton setHidden:YES];
         
         //Hit API With TextField Text
-        [[RepresentativesController sharedInstance] searchRepWithInfo:self.searchTextField.text searchType:self.type completion:^(BOOL success) {
         NSString *searchString = textField.text;
         
         //Account for full state name searches
@@ -174,19 +186,16 @@
     [failAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }]];
-    
     [self presentViewController:failAlert animated:YES completion:nil];
 }
 
 #pragma mark - Segues
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         [[segue destinationViewController] updateWithRepresentative:self.reps[indexPath.row]];
     }
 }
-
-
 
 @end
