@@ -85,16 +85,7 @@
         if (!error) {
             CLPlacemark *placemark = [placemarks objectAtIndex:0];
             NSString *zipcode = [[NSString alloc]initWithString:placemark.postalCode];
-            
-            //Hit API with zip from current location
-            [[RepresentativesController sharedInstance] searchRepWithInfo:zipcode searchType:TypeZip completion:^(BOOL success) {
-                if (success) {
-                    self.reps = [RepresentativesController sharedInstance].repsArray;
-                    [self.tableView reloadData];
-                } else {
-                    NSLog(@"error");
-                }
-            }];
+            [self runApiSearchInBackgroundWithInfo:zipcode andType:TypeZip];
         } else {
             [self presentFailureAlert];
         }
@@ -103,6 +94,22 @@
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     NSLog(@"%@", error);
+}
+
+-(void)runApiSearchInBackgroundWithInfo:(NSString *)info andType:(NSInteger)type {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        [[RepresentativesController sharedInstance] searchRepWithInfo:info searchType:type completion:^(BOOL success) {
+            if (success) {
+                self.reps = [RepresentativesController sharedInstance].repsArray;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+            } else {
+                [self presentFailureAlert];
+            }
+        }];
+    });
 }
 
 #pragma mark TableView Delegate
@@ -135,14 +142,7 @@
         if (searchString.length > 2 && self.type == TypeState) {
             searchString = [textField.text stateAbbreviationFromFullName];
         }
-        [[RepresentativesController sharedInstance] searchRepWithInfo:searchString searchType:self.type completion:^(BOOL success) {
-            if (success) {
-                self.reps = [RepresentativesController sharedInstance].repsArray;
-                [self.tableView reloadData];
-            } else {
-                [self presentFailureAlert];
-            }
-        }];
+        [self runApiSearchInBackgroundWithInfo:searchString andType:self.type];
         [textField resignFirstResponder];
         return YES;
     }
