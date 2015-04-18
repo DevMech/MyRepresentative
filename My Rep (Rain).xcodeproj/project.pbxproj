@@ -27,6 +27,8 @@
 		6A3F1D631AE087BD00B1B7DE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3F1D621AE087BD00B1B7DE /* MapKit.framework */; };
 		6A3F1D661AE14D0300B1B7DE /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F1D651AE14D0300B1B7DE /* MyAnnotation.m */; };
 		6ABB62E51AE1743100448ACA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABB62E31AE173ED00448ACA /* CoreLocation.framework */; };
+		6ABB62ED1AE19CCE00448ACA /* NSString+USStateMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABB62EB1AE19CCE00448ACA /* NSString+USStateMap.m */; };
+		6ABB62EE1AE19CCE00448ACA /* USStateAbbreviations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6ABB62EC1AE19CCE00448ACA /* USStateAbbreviations.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,9 @@
 		6A3F1D651AE14D0300B1B7DE /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
 		6ABB62E31AE173ED00448ACA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6ABB62E91AE1942100448ACA /* Colors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
+		6ABB62EA1AE19CCE00448ACA /* NSString+USStateMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+USStateMap.h"; sourceTree = "<group>"; };
+		6ABB62EB1AE19CCE00448ACA /* NSString+USStateMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+USStateMap.m"; sourceTree = "<group>"; };
+		6ABB62EC1AE19CCE00448ACA /* USStateAbbreviations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = USStateAbbreviations.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +145,9 @@
 		6A3F1D0D1AE018CD00B1B7DE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6ABB62EA1AE19CCE00448ACA /* NSString+USStateMap.h */,
+				6ABB62EB1AE19CCE00448ACA /* NSString+USStateMap.m */,
+				6ABB62EC1AE19CCE00448ACA /* USStateAbbreviations.plist */,
 				6ABB62E31AE173ED00448ACA /* CoreLocation.framework */,
 				6A3F1D621AE087BD00B1B7DE /* MapKit.framework */,
 				6A3F1D0E1AE018CD00B1B7DE /* Info.plist */,
@@ -330,6 +338,7 @@
 			files = (
 				6A3F1D401AE0190600B1B7DE /* Main.storyboard in Resources */,
 				6A3F1D1E1AE018CD00B1B7DE /* LaunchScreen.xib in Resources */,
+				6ABB62EE1AE19CCE00448ACA /* USStateAbbreviations.plist in Resources */,
 				6A3F1D1B1AE018CD00B1B7DE /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +365,7 @@
 				6A3F1D3C1AE0190600B1B7DE /* SearchViewController.m in Sources */,
 				6A3F1D591AE069A100B1B7DE /* AppearanceController.m in Sources */,
 				6A3F1D4F1AE0257300B1B7DE /* HomeCollectionViewDataSource.m in Sources */,
+				6ABB62ED1AE19CCE00448ACA /* NSString+USStateMap.m in Sources */,
 				6A3F1D5C1AE06E5200B1B7DE /* MapViewViewController.m in Sources */,
 				6A3F1D101AE018CD00B1B7DE /* main.m in Sources */,
 				6A3F1D3F1AE0190600B1B7DE /* Representative.m in Sources */,
