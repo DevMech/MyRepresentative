@@ -13,7 +13,7 @@
 
 @implementation SearchTableViewDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if ([RepresentativesController sharedInstance].repsArray.count == 0) {
         return 0;
     } else {
@@ -21,7 +21,7 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *repsArray = [RepresentativesController sharedInstance].repsArray;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     Representative *rep = repsArray[indexPath.row];
@@ -33,6 +33,8 @@
         cell.backgroundColor = DemocratBlue;
     } else if ([rep.party isEqualToString:@"L"]) {
         cell.backgroundColor = LibYellow;
+    } else if ([rep.party isEqualToString:@"I"]) {
+        cell.backgroundColor = [UIColor purpleColor];
     }
     cell.textLabel.text = rep.name;
     cell.detailTextLabel.text = [rep.state stringByAppendingString:[NSString stringWithFormat:@" - %@",rep.party]];
