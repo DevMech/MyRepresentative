@@ -12,6 +12,8 @@
 @interface DetailViewController : UIViewController
 
 @property (strong, nonatomic) Representative *rep;
+
 - (void)updateWithRepresentative: (Representative *)rep;
+
 @end
 
