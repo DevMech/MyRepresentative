@@ -12,4 +12,5 @@
 @interface AppearanceController : NSObject
 
 +(void)setupAppearance;
+
 @end
