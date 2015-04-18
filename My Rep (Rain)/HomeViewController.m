@@ -18,17 +18,16 @@
 
 @implementation HomeViewController
 
-- (void)viewWillAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-
 }
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     HomeCollectionViewCell *cell = sender;
     SearchViewController *searchViewController = [segue destinationViewController];
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];

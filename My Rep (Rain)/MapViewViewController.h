@@ -17,4 +17,5 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 -(void)updateWithRep:(Representative *)rep;
+
 @end

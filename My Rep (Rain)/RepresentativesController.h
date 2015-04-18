@@ -2,7 +2,7 @@
 //  RepresentativesController.h
 //  My Rep (Rain)
 //
-//  Created by Parker Rushton on 4/7/15.
+//  Created by Parker Rushton on 4/16/15.
 //  Copyright (c) 2015 PJayRushton. All rights reserved.
 //
 
@@ -12,8 +12,8 @@
 
 @property (strong, nonatomic) NSArray *repsArray;
 
-+ (RepresentativesController *)sharedInstance;
++(RepresentativesController *)sharedInstance;
 
-- (void)searchRepWithInfo:(NSString *)info searchType:(NSInteger)searchType completion:(void (^)(BOOL success))completion;
+-(void)searchRepWithInfo:(NSString *)info searchType:(NSInteger)searchType completion:(void (^)(BOOL success))completion;
 
 @end
