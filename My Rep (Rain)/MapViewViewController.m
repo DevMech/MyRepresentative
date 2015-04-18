@@ -24,39 +24,40 @@
     [self performGeocode];
     
 }
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
-    [self displayAnnotation];
+    self.title = self.rep.name;
 }
 
 -(void)performGeocode {
     NSString *addressString = self.rep.office;
+    self.geocoder = [CLGeocoder new];
     [self.geocoder geocodeAddressString:addressString completionHandler:^(NSArray *placemarks, NSError *error) {
-        if (error) {
+        if (!error) {
+            self.resultsArray = placemarks;
+            CLPlacemark *placeMark = self.resultsArray[0];
+            self.officeLocation = placeMark.location.coordinate;
+        [self setupMapView];
+        }
+        else {
             [self presentFailureAlert];
             return;
         }
-        else {
-            self.resultsArray = [[NSArray alloc] initWithArray:placemarks];
-            CLPlacemark *placeMark = self.resultsArray[0];
-            self.officeLocation = placeMark.location.coordinate;
-        }
     }];
-    [self setupMapView];
 }
 
 -(void)setupMapView {
     MKCoordinateRegion region;
     region.center = self.officeLocation;
-    
-    float spanX = 0.00725;
-    float spanY = 0.00725;
+    float spanX = 0.008;
+    float spanY = 0.008;
     region.span = MKCoordinateSpanMake(spanX, spanY);
     [self.mapView setRegion:region animated:YES];
+    [self displayAnnotation];
 }
 
 -(void)displayAnnotation {
-    MyAnnotation* annotation = [MyAnnotation new];
+    MyAnnotation *annotation = [MyAnnotation new];
 
     annotation.coordinate = self.officeLocation;
     annotation.title = self.rep.name;
