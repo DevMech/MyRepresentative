@@ -13,10 +13,7 @@
 
 +(void)setupAppearance {
     //Navigation Bars
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
     [[UINavigationBar appearance] setOpaque:YES];
     [[UINavigationBar appearance] setTranslucent:NO];
     

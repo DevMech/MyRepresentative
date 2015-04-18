@@ -41,9 +41,9 @@
     [self.tableView reloadData];
     
     switch (self.type) {
-        case TypeZip:
+        case TypeZip: {
             self.searchTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-            break;
+            break; }
         case TypeCurrentLocation:
             [self.searchTextField removeFromSuperview];
             break;
